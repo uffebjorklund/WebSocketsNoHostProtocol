@@ -1,0 +1,15 @@
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\NoHost.Modules.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\NoHost.Modules.pdb
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\Newtonsoft.Json.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Core.Common.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Core.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Enterprise.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Plugin.Framework.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Protocol.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Protocol.Json.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Protocol.Putty.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Protocol.Rfc6455.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\XSockets.Serialization.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\bin\Release\Newtonsoft.Json.xml
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\obj\Release\NoHost.Modules.dll
+C:\Users\Uffe\Desktop\NoHost\NoHost.Modules\obj\Release\NoHost.Modules.pdb

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>NoHost SubProtocol</title>
+</head>
+<body>
+    <p>
+        Example of usign websockets via a browser from disk (c:\somepath\somefile.html).<br/>
+        We can achieve this by creating a simple custom protocol (with a sub-protocol defined) in XSockets.<br/><br/>
+        The client use native websockets API, but for more control and features you can use the XSockets.NET JavaScript client.
+    </p>
+    <div id="state">Unknown</div>
+
+    <div id="chat">
+        <h2>Chat</h2>
+        <hr/>
+        <input type="text" id="msg" />
+        <button id="send">send</button>
+        <div id="messages"></div>
+    </div>
+    
+    <script>
+        //Open a native websocket with the new sub-protocol
+        var ws = new WebSocket('ws://localhost:4502', ['NoHost']);
+
+        //Setup event for onopen
+        ws.onopen = function () {
+            console.log('opened');
+
+        }
+        //Setup event for onclose
+        ws.onclose = function () {
+            console.log('closed');
+        }
+        //Setup event for onmessage
+        ws.onmessage = function (message) {
+            //Since XSockets have a predefined format we need to parse the message
+            var model = JSON.parse(message.data);
+            //If controller open/close, do nothing
+            if (model.T == 2 || model.T == 3) {
+                return;
+            }
+            var data = JSON.parse(model.D);
+            console.log(data);
+        }
+        //send message on click
+        document.querySelector('#send').onclick = function (evt) {
+            evt.stopPropagation();
+            var message = "Hello FullDuplex World";
+            //construct message that is expected by xsockets
+            var json = { D: message, T: 'say', C: 'chat' };
+            ws.send(JSON.stringify(json));
+        };
+
+        //Open a native websocket
+        var ws = new WebSocket('ws://localhost:4502', ['NoHost']);
+
+        //Setup event for onopen
+        ws.onopen = function () {
+            document.querySelector('#state').innerText = "OPENED";
+            document.querySelector('#chat').style = "visibility:block;"
+            //Open our chat controller, we can have several controller opened at once, but we only need one here
+            var json = { T: 1, C: 'chat' };
+            ws.send(JSON.stringify(json));
+        }
+        //Setup event for onclose
+        ws.onclose = function () {
+            document.querySelector('#state').innerText = "CLOSED";
+            document.querySelector('#chat').style = "visibility:hidden";
+        }
+        //Setup event for onmessage
+        ws.onmessage = function (message) {
+            //Since XSockets have a predefined format we need to parse the message
+            var model = JSON.parse(message.data);
+            //If controller open
+            if (model.T == 2) {
+                document.querySelector('#state').innerText = "Controller Opened";
+                return;
+            }
+            //If controller closed
+            if (model.T == 3) {
+                document.querySelector('#state').innerText = "Controller Closed";
+                return;
+            }
+            //Else we assume that the message is a chatmessage, but we could look into this further.
+            var element = document.createElement('div');
+            element.innerText = JSON.parse(model.D);
+            document.querySelector('#messages').appendChild(element);
+        }
+        //send message on click
+        document.querySelector('#send').onclick = function (evt) {
+            evt.stopPropagation();
+            var message = document.querySelector('#msg').value;
+            //construct message that is expected by xsockets
+            var json = { D: message, T: 'say', C: 'chat' };
+            ws.send(JSON.stringify(json));
+        };
+        document.querySelector('#msg').focus();
+
+    </script>
+</body>
+</html>
