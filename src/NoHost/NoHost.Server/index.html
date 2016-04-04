@@ -22,38 +22,7 @@
     </div>
     
     <script>
-        //Open a native websocket with the new sub-protocol
-        var ws = new WebSocket('ws://localhost:4502', ['NoHost']);
-
-        //Setup event for onopen
-        ws.onopen = function () {
-            console.log('opened');
-
-        }
-        //Setup event for onclose
-        ws.onclose = function () {
-            console.log('closed');
-        }
-        //Setup event for onmessage
-        ws.onmessage = function (message) {
-            //Since XSockets have a predefined format we need to parse the message
-            var model = JSON.parse(message.data);
-            //If controller open/close, do nothing
-            if (model.T == 2 || model.T == 3) {
-                return;
-            }
-            var data = JSON.parse(model.D);
-            console.log(data);
-        }
-        //send message on click
-        document.querySelector('#send').onclick = function (evt) {
-            evt.stopPropagation();
-            var message = "Hello FullDuplex World";
-            //construct message that is expected by xsockets
-            var json = { D: message, T: 'say', C: 'chat' };
-            ws.send(JSON.stringify(json));
-        };
-
+       
         //Open a native websocket
         var ws = new WebSocket('ws://localhost:4502', ['NoHost']);
 
